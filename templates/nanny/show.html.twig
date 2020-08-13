@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title nanny.title %}
+
+{% block body %}
+    <div class="jumbotron">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+
+                </div>
+                <div class="col-md-4">
+                    <h1>{{ nanny.title }}</h1>
+                    <div class="text-primary" style="font-size: 4rem;font-weight: bold;">{{ nanny.formattedPrice }} €</div>
+                    <a href="#" class="btn btn-primary">Contacter la nourrice</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-4">
+
+        <p>
+            {{ nanny.description | nl2br }}
+        </p>
+
+        <div class="row">
+            <div class="col-md-8">
+                <h2>Caractéristiques</h2>
+                <table class="table table-striped">
+                    <tr>
+                        <td>Ancienneté</td>
+                        <td>{{ nanny.experience }} an(s)</td>
+                    </tr>
+                    <tr>
+                        <td>Etat Civil</td>
+                        <td>{{ nanny.statutType }} an(s)</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-md-4">
+                <h2>Spécificités</h2>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
