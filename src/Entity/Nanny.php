@@ -4,7 +4,8 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Cocur\Slugify\Slugify;
-
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\NannyRepository")
  */
@@ -16,6 +17,20 @@ class Nanny
         2 => 'Divorcé(e)',
     ];
 
+    const VILLE= [
+        0 => 'Lyon',
+        1 => 'Villeurbanne',
+        2 => 'Caluire-et-Cuire',
+        3 => 'La Mulatière',
+        4 => 'Sainte-Foy-lès-Lyon',
+        5 => 'Tassin-la-Demi-Lune',
+        6 => 'Écully',
+        7 => 'Champagne-au-Mont-d\'Or',
+        8 => 'Oullins',
+        9 => 'Saint-Fons',
+        10 => 'Bron	',
+    ];
+
 
     /**
      * @ORM\Id()
@@ -25,6 +40,7 @@ class Nanny
     private $id;
 
     /**
+     * @Assert\Length(min=5, max=255)
      * @ORM\Column(type="string", length=255)
      */
     private $title;
@@ -36,6 +52,7 @@ class Nanny
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\Range(min=0, max =40)
      */
     private $experience;
 
@@ -50,7 +67,7 @@ class Nanny
     private $statut;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="integer")
      */
     private $city;
 
@@ -60,9 +77,10 @@ class Nanny
     private $address;
 
     /**
+     * @Assert\Regex("/^[0-9]{5}$/")
      * @ORM\Column(type="string", length=255)
      */
-    private $postal_code = 69000;
+    private $postal_code;
 
     /**
      * @ORM\Column(type="boolean",options={"default": false})
@@ -160,7 +178,7 @@ class Nanny
         return self::STATUT [$this->statut];
     }
 
-    public function getCity(): ?string
+    public function getCity(): ?int
     {
         return $this->city;
     }
@@ -170,6 +188,11 @@ class Nanny
         $this->city = $city;
 
         return $this;
+    }
+
+    public function getCityType(): string
+    {
+        return self::VILLE [$this->city];
     }
 
     public function getAddress(): ?string
