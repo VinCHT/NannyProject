@@ -3,7 +3,10 @@
 namespace App\Repository;
 
 use App\Entity\Nanny;
+
+use App\Entity\NannySearch;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
@@ -21,13 +24,27 @@ class NannyRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return Nanny[]
+     * @return Query[]
      */
-    public function findAllVisible(): array
+    public function findAllVisibleQuery(NannySearch $search): Query
     {
-        return $this->findVisibleQuery()
-            ->getQuery()
-            ->getResult();
+       $query = $this->findVisibleQuery();
+
+       if ($search->getMaxPrice())
+       {
+           $query = $query
+               ->andWhere('n.price <= :maxprice')
+               ->setParameter('maxprice', $search->getMaxPrice());
+       }
+
+        if ($search->getMinExperience())
+        {
+            $query = $query
+                ->andWhere('n.experience >= :minexperience')
+                ->setParameter('minexperience', $search->getMinExperience());
+        }
+            return $query->getQuery();
+
     }
 
     /**

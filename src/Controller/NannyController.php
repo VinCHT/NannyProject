@@ -3,9 +3,14 @@
 namespace App\Controller;
 
 use App\Entity\Nanny;
+
+use App\Entity\NannySearch;
+use App\Form\NannySearchType;
 use App\Repository\NannyRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -31,10 +36,21 @@ class NannyController extends AbstractController
      * @Route("/nourrices", name="nanny.index")
      * @return Response
      */
-    public function index(): Response
+    public function index(PaginatorInterface $paginator, Request $request): Response
     {
+        $search = new NannySearch();
+        $form = $this->createForm(NannySearchType::class, $search);
+        $form->handleRequest($request);
+
+        $nannies = $paginator->paginate(
+            $this->repository->findAllVisibleQuery($search),
+            $request->query->getInt('page',1),
+            12
+        );
         return $this->render('nanny/index.html.twig', [
-            'current_menu' => 'nannies'
+            'current_menu' => 'nannies',
+            'nannies' => $nannies,
+            'form' => $form->createView()
         ]);
     }
 
