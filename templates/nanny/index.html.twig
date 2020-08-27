@@ -14,8 +14,11 @@
                     {{ form_row(form.maxPrice) }}
                 </div>
                 <div class="col">
+                    {{ form_row(form.options) }}
+                </div>
+                <div class="col">
                     <div class="form-group">
-                        <button class="btn btn-primary">Rechercher</button>
+                        <button id="search-nanny" class="btn btn-primary">Rechercher</button>
                     </div>
                 </div>
             </div>
@@ -33,8 +36,8 @@
             {% endfor %}
         </div>
 
-        <div class="pagination">
-            {{ knp_pagination_render(nannies) }}
+        <div id="pagination-nanny" class="pagination">
+                {{ knp_pagination_render(nannies) }}
         </div>
     </div>
 {% endblock %}

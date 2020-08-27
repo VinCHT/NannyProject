@@ -17,8 +17,9 @@
                         <h5 class="card-title">
                            <a href="{{ path('nanny.show', { id: nanny.id, slug: nanny.slug }) }}">{{ nanny.title}}</a>
                         </h5>
-                        <p class="card-text">{{ nanny.city }} ({{ nanny.postalCode }})</p>
-                        <div class="text-primary" style="font-weight: bold; font-size: 2rem;">{{ nanny.formattedPrice }} €</div>
+                        <p class="card-text">{{ nanny.cityType }} ({{ nanny.postalCode }})</p>
+
+                        <div class="text" >{{ nanny.formattedPrice }} €</div>
                      </div>
                   </div>
                </div>

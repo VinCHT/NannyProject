@@ -3,6 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Nanny;
+use App\Entity\Option;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -22,6 +24,11 @@ class NannyType extends AbstractType
             ])
             ->add('city', ChoiceType::class, [
                 'choices' => $this->getChoices2()
+            ])
+            ->add('options', EntityType::class, [
+                'class' => Option::class,
+                'choice_label' => 'name',
+                'multiple' => true
             ])
             ->add('address')
             ->add('postal_code')

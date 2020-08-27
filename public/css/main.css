@@ -1,0 +1,82 @@
+body {
+    background:#6ababe;
+    color:black;
+}
+
+.navbar {
+       background:#cc9260;
+}
+
+/* cartes */
+    /* Prix dans la carte*/
+.text{
+    font-weight: bold;
+    font-size: 2rem;
+    color:#cc9260;
+}
+
+    /*Titre de la carte*/
+h5 a {
+    color:#cc9260;
+}
+/*Boutons rechercher filtres nourrice + se connecter + editer */
+#search-nanny , #connect {
+    background-color: #cc9260;
+    border-color: #cc9260;
+
+}
+#edit , #edit-profil {
+    background-color: #cc9260;
+    border-color: #cc9260;
+}
+
+#add-profil, #contact-nanny {
+    background-color: #000000;
+    border-color: #000000;
+}
+
+#price-profil {
+    font-size: 4rem;
+    font-weight: bold;
+    color: #cc9260;
+}
+
+/*Bouton editer*/
+
+/*alignement des item*/
+.pagination {
+    border-color: #cc9260;
+    font-size: 1rem;
+    color:#cc9260;
+    display:flex;
+    justify-content: center;
+}
+
+.page-item.active .page-link {
+    z-index: 3;
+    color: #fff;
+    background-color: #cc9260;
+    border-color: #cc9260;
+    color: black;
+}
+
+/*Page en cours*/
+.page-item.active {
+    background-color: #6ababe;
+}
+/*Couleur des nombres de la barre de pagination*/
+.page-link {
+    color:#6ababe;
+}
+/*Survol de la barre de pagination*/
+.page-link:hover {
+color:#cc9260;
+}
+
+/*Formulaire de suppression nourrice*/
+
+#form-delete {
+    display:flex;
+    display: inline-block;
+}
+

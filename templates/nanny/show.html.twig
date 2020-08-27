@@ -11,8 +11,8 @@
                 </div>
                 <div class="col-md-4">
                     <h1>{{ nanny.title }}</h1>
-                    <div class="text-primary" style="font-size: 4rem;font-weight: bold;">{{ nanny.formattedPrice }} €</div>
-                    <a href="#" class="btn btn-primary">Contacter la nourrice</a>
+                    <div id="price-profil">{{ nanny.formattedPrice }} €</div>
+                    <a href="#" id="contact-nanny" class="btn btn-primary">Contacter la nourrice</a>
                 </div>
             </div>
         </div>
@@ -33,7 +33,7 @@
                     </tr>
                     <tr>
                         <td>Etat Civil</td>
-                        <td>{{ nanny.statutType }} an(s)</td>
+                        <td>{{ nanny.statutType }} </td>
                     </tr>
                 </table>
             </div>

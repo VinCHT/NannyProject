@@ -16,19 +16,19 @@
         <table class="table table-striped">
             <thead>
             <tr>
-                <th>Titre</th>
+                <th>Nourrices</th>
                 <th>Actions</th>
             </tr>
             </thead>
             <tbody>
-            {% for nanny in nannies %}
+            {% for option in options %}
                 <tr>
-                    <td>{{ nanny.title }}</td>
+                    <td>{{ option.name }}</td>
                     <td>
-                        <a href="{{ path('admin.nanny.edit', {id: nanny.id}) }}" id="edit" class="btn btn-secondary">Editer</a>
-                        <form method="post" id="form-delete" action="{{ path('admin.nanny.delete', {id: nanny.id}) }}" onsubmit="return confirm('Êtes vous vraiment sûr ?')">
+                        <a href="{{ path('option_edit', {id: option.id}) }}" id="edit" class="btn btn-secondary">Editer</a>
+                        <form method="post" id="form-delete" action="{{ path('option_delete', {id: option.id}) }}" onsubmit="return confirm('Êtes vous vraiment sûr ?')">
                             <input type="hidden" name="_method" value="DELETE">
-                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ nanny.id) }}">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ option.id) }}">
                             <button class="btn btn-danger">Supprimer</button>
                         </form>
                     </td>
@@ -38,7 +38,7 @@
         </table>
 
         <div class="text-right">
-            <a href="{{ path('admin.nanny.new') }}" id="add-profil"class="btn btn-primary">Créer un nouveau profil</a>
+            <a href="{{ path('option_new') }}" id="add-profil" class="btn btn-primary">Créer une nouvelle option</a>
         </div>
 
     </div>

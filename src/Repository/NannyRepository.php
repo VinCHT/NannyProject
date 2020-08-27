@@ -43,6 +43,16 @@ class NannyRepository extends ServiceEntityRepository
                 ->andWhere('n.experience >= :minexperience')
                 ->setParameter('minexperience', $search->getMinExperience());
         }
+        if ($search->getOptions()->count() > 0) {
+            $k = 0;
+            foreach($search->getOptions() as $option) {
+                $k++;
+                $query = $query
+                    ->andWhere(":option$k MEMBER OF n.options")
+                    ->setParameter("option$k", $option);
+            }
+        }
+
             return $query->getQuery();
 
     }
@@ -54,14 +64,17 @@ class NannyRepository extends ServiceEntityRepository
     {
         return $this->findVisibleQuery()
             ->setMaxResults(4)
+            ->date_create()
             ->getQuery()
             ->getResult();
+
     }
 
     private function findVisibleQuery(): QueryBuilder
     {
         return $this->createQueryBuilder('n')
             ->where('n.occuppe = false');
+
     }
 
 
