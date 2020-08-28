@@ -1,4 +1,9 @@
 <div class="card mb-4">
+    {% if nanny.filename %}
+        <img src="{{ vich_uploader_asset(nanny, 'imageFile') | imagine_filter('thumb') }}" alt="card-img-top" style="width: 100%; height:auto;">
+    {% else %}
+        <img src="{{ '/images/nannies/empty.jpg' | imagine_filter('thumb') }}" alt="card-img-top" style="width: 100%; height:auto;">
+    {% endif %}
     <div class="card-body">
         <h5 class="card-title">
             <a href="{{ path('nanny.show', {slug: nanny.slug, id: nanny.id}) }}">

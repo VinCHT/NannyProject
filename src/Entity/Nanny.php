@@ -6,9 +6,15 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Cocur\Slugify\Slugify;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\NannyRepository")
+ * @UniqueEntity("title")
+ * @Vich\Uploadable()
  */
 class Nanny
 {
@@ -40,10 +46,27 @@ class Nanny
      */
     private $id;
 
+
+    /**
+     * @var string|null
+     * @ORM\Column (type="string", length=255)
+     */
+    private $filename;
+
+    /**
+     * @var File|null
+     * @Assert\Image(
+     *     mimeTypes="image/jpeg"
+     * )
+     * @Vich\UploadableField(mapping="nanny_image",fileNameProperty="filename" )
+     *
+     */
+    private $imageFile;
     /**
      * @Assert\Length(min=5, max=255)
      * @ORM\Column(type="string", length=255)
      */
+
     private $title;
 
     /**
@@ -97,6 +120,7 @@ class Nanny
      * @ORM\ManyToMany(targetEntity=Option::class, inversedBy="nannies")
      */
     private $options;
+
 
 
     public function __construct()
@@ -279,6 +303,58 @@ class Nanny
 
         return $this;
     }
+
+    /**
+     * @return null|string
+     */
+    public function getFilename(): ?string
+    {
+        return $this->filename;
+    }
+
+    /**
+     * @param null|string $filename
+     * @return Nanny
+     */
+    public function setFilename(?string $filename): Nanny
+    {
+        $this->filename = $filename;
+        return $this;
+    }
+
+    /**
+     * @return null|File
+     */
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    /**
+     * @param null|File $imageFile
+     * @return Nanny
+     */
+    public function setImageFile(?File $imageFile): Nanny
+    {
+        $this->imageFile = $imageFile;
+        if ($this->imageFile instanceof UploadedFile) {
+            $this->created_at = new \DateTime('now');
+        }
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->created_at;
+    }
+
+    public function setUpdatedAt(\DateTimeInterface $created_at): self
+    {
+        $this->updated_at = $created_at;
+
+        return $this;
+    }
+
 
 
 }
