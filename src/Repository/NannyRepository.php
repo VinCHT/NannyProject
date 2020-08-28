@@ -22,7 +22,7 @@ class NannyRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Nanny::class);
     }
-
+    /*Fonction afficher les profils dispos*/
     /**
      * @return Query[]
      */
@@ -56,7 +56,7 @@ class NannyRepository extends ServiceEntityRepository
             return $query->getQuery();
 
     }
-
+    /*TODO Fonction pour selectionner les derniers inscrits*/
     /**
      * @return Nanny[]
      */

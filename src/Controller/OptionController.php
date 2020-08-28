@@ -24,7 +24,7 @@ class OptionController extends AbstractController
             'options' => $optionRepository->findAll(),
         ]);
     }
-
+    /*Fonction pour ajouter une option*/
     /**
      * @Route("/new", name="option_new", methods={"GET","POST"})
      */
@@ -47,7 +47,7 @@ class OptionController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-
+    /*Fonction pour éditer-actualiser une option*/
     /**
      * @Route("/{id}/edit", name="option_edit", methods={"GET","POST"})
      */
@@ -67,7 +67,7 @@ class OptionController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-
+    /*Fonction pour supprimer une option*/
     /**
      * @Route("/{id}", name="option_delete", methods={"DELETE"})
      */

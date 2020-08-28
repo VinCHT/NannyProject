@@ -6,6 +6,7 @@ use App\Repository\NannyRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+/*Fonction pour gérer la page d'accueil*/
 
 class HomeController extends AbstractController
 {

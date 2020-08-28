@@ -28,7 +28,7 @@ class NannyType extends AbstractType
             ])
             ->add('options', EntityType::class, [
                 'class' => Option::class,
-                'require' => false,
+                'required' => false,
                 'choice_label' => 'name',
                 'multiple' => true
             ])

@@ -31,7 +31,7 @@ class NannyController extends AbstractController
         $this->repository = $repository;
         $this->em = $em;
     }
-
+    /*Fonction pour gérer la pagination des nourrices*/
     /**
      * @Route("/nourrices", name="nanny.index")
      * @return Response
@@ -53,7 +53,7 @@ class NannyController extends AbstractController
             'form' => $form->createView()
         ]);
     }
-
+    /*Fonction pour montrer un profil cible*/
     /**
      * @Route("/nourrices/{slug}-{id}", name="nanny.show", requirements={"slug": "[a-z0-9\-]*"})
      * @param Nanny $nanny
